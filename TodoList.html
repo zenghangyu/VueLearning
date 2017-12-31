@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue"></script>
+</head>
+
+<body>
+
+
+    <div id="addNew">
+        <input type="text" name="newItemInput" v-model="newItem">
+        <button @click="addNewItem()">新增</button>
+    </div>
+
+    <div id="showPanel">
+        <h2>您的待办事项</h2>
+        <ul>
+            <li v-for="(item, index) in currentItems">
+                <span @click="changeEdit(item)" v-show="item.EditFlag">{{item.data}}</span>
+                <span v-show="!item.EditFlag"><input type="text" v-model="item.data"> <span @click="changeEdit(item)">确定</span></span>
+                <span style="color:red; cursor:pointer;" @click="Delete(index)">X</span></li>
+        </ul>
+    </div>
+
+
+    <script>
+        var addNew = new Vue({
+            el: '#addNew',
+            data: {
+                todoItems: [],
+                newItem: ''
+            },
+            methods: {
+                addNewItem: function() {
+                    // this.todoItems.push(this.newItem);
+                    showItems.$emit('addNew', this.newItem);
+                }
+            }
+        })
+        var showItems = new Vue({
+            el: '#showPanel',
+            data: {
+                currentItems: [],
+            },
+            methods: {
+                addNewItem: function(item) {
+                    this.currentItems.push(item);
+                },
+                Delete: function(index) {
+                    this.currentItems.splice(index, 1);
+                },
+                changeEdit: function(item) {
+                    item.EditFlag = !item.EditFlag;
+                }
+            }
+        })
+        showItems.$on('addNew', function(newData) {
+            var item = {
+                data: newData,
+                EditFlag: true
+            };
+            this.currentItems.push(item);
+        })
+    </script>
+</body>
+
+</html>
