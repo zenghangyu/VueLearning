@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue"></script>
+    <style>
+        body {
+            width: 800px;
+            margin: auto;
+            border: 1px solid red;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .tab-bar a {
+            display: inline-block;
+            width: 180px;
+            height: 30px;
+            text-align: center;
+            border-bottom: 2px solid transparent;
+            transition: all 1s;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .tab-bar a:hover {
+            color: red;
+            border-bottom: 2px solid red;
+        }
+        
+        .tab-conteng li {
+            list-style: none;
+            width: 100%;
+            height: 300px;
+            text-align: center;
+            line-height: 300px;
+            margin-top: 10px;
+        }
+        
+        .tab-conteng li:nth-child(1) {
+            background: red;
+        }
+        
+        .tab-conteng li:nth-child(2) {
+            background: blue;
+        }
+        
+        .tab-conteng li:nth-child(3) {
+            background: yellow;
+        }
+        
+        .tab-conteng li:nth-child(4) {
+            background: green;
+        }
+    </style>
+</head>
+
+<body>
+    <section id="app">
+        <div class="tab-bar">
+            <a @click="showData=1">javascirpt</a>
+            <a @click="showData=2">vue</a>
+            <a @click="showData=3">react</a>
+            <a @click="showData=4">ng</a>
+        </div>
+
+        <ul class="tab-conteng">
+            <li v-show="showData===1">javascirpt</li>
+            <li v-show="showData===2">vue</li>
+            <li v-show="showData===3">react</li>
+            <li v-show="showData===4">ng</li>
+        </ul>
+    </section>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                showData: 1
+            }
+        })
+    </script>
+</body>
+
+</html>
