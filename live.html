@@ -9,69 +9,59 @@
 <body>
 
     <div id="app">
+        <son-component></son-component>
     </div>
 
+    <div id="papp">
+        <input type="text" v-model="msg">
+        <props-component :pdata="msg" :datab="a.a" :datac="a.b"></props-component>
+        <input-component :pdata="msg"></input-component>
+    </div>
     <script type="text/javascript">
-        // var app = new Vue({
-        //     el: '#app',
-        //     data: {
-        //         message: "xuxiao is boy"
-        //     },
-        //     beforeCreate: function() {
-        //         console.group('beforeCreate 创建前状态===============》');
-        //         console.log("%c%s", "color:red", "el     : " + this.$el); //undefined
-        //         console.log("%c%s", "color:red", "data   : " + this.$data); //undefined 
-        //         console.log("%c%s", "color:red", "message: " + this.message)
-        //     },
-        //     created: function() {
-        //         console.group('created 创建完毕状态===============》');
-        //         console.log("%c%s", "color:red", "el     : " + this.$el); //undefined
-        //         console.log("%c%s", "color:red", "data   : " + this.$data); //已被初始化 
-        //         console.log("%c%s", "color:red", "message: " + this.message); //已被初始化
-        //     },
-        //     beforeMount: function() {
-        //         console.group('beforeMount 挂载前状态===============》');
-        //         console.log("%c%s", "color:red", "el     : " + (this.$el)); //已被初始化
-        //         console.log(this.$el);
-        //         console.log("%c%s", "color:red", "data   : " + this.$data); //已被初始化  
-        //         console.log("%c%s", "color:red", "message: " + this.message); //已被初始化  
-        //     },
-        //     mounted: function() {
-        //         console.group('mounted 挂载结束状态===============》');
-        //         console.log("%c%s", "color:red", "el     : " + this.$el); //已被初始化
-        //         console.log(this.$el);
-        //         console.log("%c%s", "color:red", "data   : " + this.$data); //已被初始化
-        //         console.log("%c%s", "color:red", "message: " + this.message); //已被初始化 
-        //     },
-        //     beforeUpdate: function() {
-        //         console.group('beforeUpdate 更新前状态===============》');
-        //         console.log("%c%s", "color:red", "el     : " + this.$el);
-        //         console.log(this.$el);
-        //         console.log("%c%s", "color:red", "data   : " + this.$data);
-        //         console.log("%c%s", "color:red", "message: " + this.message);
-        //     },
-        //     updated: function() {
-        //         console.group('updated 更新完成状态===============》');
-        //         console.log("%c%s", "color:red", "el     : " + this.$el);
-        //         console.log(this.$el);
-        //         console.log("%c%s", "color:red", "data   : " + this.$data);
-        //         console.log("%c%s", "color:red", "message: " + this.message);
-        //     },
-        //     beforeDestroy: function() {
-        //         console.group('beforeDestroy 销毁前状态===============》');
-        //         console.log("%c%s", "color:red", "el     : " + this.$el);
-        //         console.log(this.$el);
-        //         console.log("%c%s", "color:red", "data   : " + this.$data);
-        //         console.log("%c%s", "color:red", "message: " + this.message);
-        //     },
-        //     destroyed: function() {
-        //         console.group('destroyed 销毁完成状态===============》');
-        //         console.log("%c%s", "color:red", "el     : " + this.$el);
-        //         console.log(this.$el);
-        //         console.log("%c%s", "color:red", "data   : " + this.$data);
-        //         console.log("%c%s", "color:red", "message: " + this.message)
-        //     }
-        // })
+        /**
+         * propsData只能用于new创建的实例中，子组件传值无效
+         * 
+         */
+        var fatherIsWho = Vue.extend({
+            template: `<p>{{question}}结果:{{answer}}</p>`,
+            data: function() {
+                return {
+                    question: "你的爹地是谁?"
+                }
+            },
+            props: ['answer']
+        })
+        new fatherIsWho({
+            propsData: {
+                'answer': '马云'
+            }
+        }).$mount('#app');
+
+        /**
+         * props 可以是数组或对象，用于接收来自父组件的数据。props 可以是简单的数组，或者使用对象作为替代，对象允许配置高级选项，如类型检测、自定义校验和设置默认值。
+         * 
+         * 
+         * 
+         * 动态传值
+         */
+        Vue.component('props-component', {
+            props: ['pdata', 'datab', 'datac'],
+            template: '<div>{{pdata}},{{datab}},{{datac}}</div>'
+        })
+        Vue.component('input-component', {
+            props: ['pdata'],
+            template: '<input type="text" v-model="pdata">'
+        })
+        var Papp = new Vue({
+            el: '#papp',
+            data: {
+                msg: '哈哈哈',
+                a: {
+                    a: '2',
+                    b: '3'
+                }
+            }
+        })
     </script>
 </body>
 
