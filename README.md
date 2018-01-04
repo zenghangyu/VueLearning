@@ -11,6 +11,8 @@ The Learning process of Vue
 
 >2018.1.3 在使用过滤器filters的过程中深度学习了 filters的使用场景:
 
+> 2018.1.4 学习了自定义指令以及钩子函数在自定义指令中的实践应用
+
 
 
 >#### 其可以在（**双花括号插值和 v-bind 表达式** ）中使用  使用方法为
@@ -26,3 +28,12 @@ The Learning process of Vue
 > 组件内定义为filters:{}  全局定义为Vue.filter('',function(){})
 >
 > 过滤器函数总接收表达式的值 (之前的操作链的结果) 作为第一个参数。
+
+#### 自定义指令
+
+![](/img/direct.png)
+
+
+
+
+
