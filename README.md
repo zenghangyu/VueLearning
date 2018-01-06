@@ -13,6 +13,8 @@ The Learning process of Vue
 
 > 2018.1.4 学习了自定义指令以及钩子函数在自定义指令中的实践应用
 
+> 2018.1.5  学习事件处理
+
 
 
 >#### 其可以在（**双花括号插值和 v-bind 表达式** ）中使用  使用方法为
@@ -32,6 +34,14 @@ The Learning process of Vue
 #### 自定义指令
 
 ![](/img/direct.png)
+
+
+
+
+
+#### 事件处理
+
+![](img/handle.png)
 
 
 

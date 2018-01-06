@@ -8,6 +8,18 @@
         input:focus {
             background-color: yellow;
         }
+        
+        .outerhtml {
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+        
+        .innerhtml {
+            width: 100px;
+            height: 100px;
+            background: blue;
+        }
     </style>
 </head>
 
@@ -28,6 +40,17 @@
     <div id="direct">
         <input type="text">
         <input type="text" v-focus>
+    </div>
+
+
+    <div id="handle">
+        <div class="outerhtml" @click.capture="alertMessage('哦')">
+            <div class="innerhtml" @click="alertMessage('嗯')">
+
+            </div>
+        </div>
+
+        <button v-on:click.once="lertMessage">dianwo </button>
     </div>
     <script type="text/javascript">
         /**
@@ -104,6 +127,20 @@
             //inserted为钩子函数
             inserted: function(el) {
                 el.focus();
+            }
+        })
+
+        // 测试 .capture
+        var handle = new Vue({
+            el: "#handle",
+            data: {},
+            methods: {
+                alertMessage: function(e) {
+                    alert(e);
+                },
+                lertMessage: function() {
+                    console.log(1)
+                }
             }
         })
     </script>
