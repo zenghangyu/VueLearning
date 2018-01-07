@@ -52,6 +52,9 @@
 
         <button v-on:click.once="lertMessage">dianwo </button>
     </div>
+
+
+    <input type="checkbox" v-model="toggle" true-value="yes" false-value="no"> // 当选中时 vm.toggle === 'yes' // 当没有选中时 vm.toggle === 'no'
     <script type="text/javascript">
         /**
          * propsData只能用于new创建的实例中，子组件传值无效
@@ -130,7 +133,7 @@
             }
         })
 
-        // 测试 .capture
+        // event handing .capture
         var handle = new Vue({
             el: "#handle",
             data: {},
