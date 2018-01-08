@@ -61,4 +61,4 @@ The Learning process of Vue
 
 每个 Vue 实例在被创建之前都要经过一系列的初始化过程。例如需要设置数据监听、编译模板、挂载实例到 DOM、在数据变化时更新 DOM 等。同时在这个过程中也会运行一些叫做生命周期钩子的函数，该函数寓意什么时候，做什么事情。给予用户机会在一些特定的场景下添加他们自己的代码。
 
-![](https://user-gold-cdn.xitu.io/2018/1/2/160b6d545e5aefa2?imageslim)
+![](https://user-gold-cdn.xitu.io/2018/1/2/160b6d545e5aefa2?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
