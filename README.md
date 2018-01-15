@@ -77,3 +77,6 @@ The Learning process of Vue
 
 
 
+### 组件
+
+![](./img/component.png)
