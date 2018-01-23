@@ -10,15 +10,22 @@
 </head>
 
 <body>
-    <h1>helloworld 实例</h1>
+    <h1>v-if&&v-else&&v-show</h1>
     <div id="app">
-        {{message}}
+
+        <div v-if="isLogin">指令</div>
+        <div v-else>指令</div>
     </div>
     <script>
+        /**
+                *v-if 和v-show的区别：
+        v-if： 判断是否加载，可以减轻服务器的压力，在需要时加载。
+        v-show：调整css dispaly属性，可以使客户端操作更加流畅。
+                **/
         var app = new new Vue({
             el: "#app",
             data: {
-                message: 'hello World!'
+                isLogin: true
             }
         })
     </script>
