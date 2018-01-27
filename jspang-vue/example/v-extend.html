@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <title>v-extend扩展实例构造器</title>
+</head>
+
+<body>
+    <h1>v-extend扩展实例构造器</h1>
+    <hr>
+    <author></author>
+
+    <script type="text/javascript">
+        var authorExtend = Vue.extend({
+            template: "<p :name>{{authorName}}</p>",
+            data: function() {
+                return {
+                    authorName: '第一个扩展器',
+                    name: "扩展器"
+                }
+            }
+        })
+
+
+        var authorExtend = Vue.extend({
+            template: "<p><a :href='authorUrl'>{{authorName}}</a></p>",
+            data: function() {
+                return {
+                    authorName: 'JSPang',
+                    authorUrl: 'http://www.jspang.com'
+                }
+            }
+        });
+        new authorExtend().$mount('author')
+    </script>
+</body>
+
+</html>
