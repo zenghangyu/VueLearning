@@ -11,29 +11,32 @@
     <h1>v-extend扩展实例构造器</h1>
     <hr>
     <author></author>
-
+    <div id="author"></div>
     <script type="text/javascript">
+        /**
+                    template里的字符串不能绑定自定义属性 例如:name :att 什么的  这样会导致渲染失败
+                **/
         var authorExtend = Vue.extend({
-            template: "<p :name>{{authorName}}</p>",
+            template: "<p :class='name'>{{authorName}}</p>",
             data: function() {
                 return {
                     authorName: '第一个扩展器',
-                    name: "扩展器"
+                    name: 'wo'
                 }
             }
         })
 
 
-        var authorExtend = Vue.extend({
-            template: "<p><a :href='authorUrl'>{{authorName}}</a></p>",
-            data: function() {
-                return {
-                    authorName: 'JSPang',
-                    authorUrl: 'http://www.jspang.com'
-                }
-            }
-        });
-        new authorExtend().$mount('author')
+        // var authorExtend = Vue.extend({
+        //     template: "<p><a :href='authorUrl'>{{authorName}}</a></p>",
+        //     data: function() {
+        //         return {
+        //             authorName: 'JSPang',
+        //             authorUrl: 'http://www.jspang.com'
+        //         }
+        //     }
+        // });
+        new authorExtend().$mount('#author')
     </script>
 </body>
 

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue.set全局操作</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+    <h1>Vue.set全局操作</h1>
+    <div id="app">
+        {{message}}
+        <ul>
+            <li v-for="item in arr">{{item}}</li>
+        </ul>
+    </div>
+
+    <h3>vue.set</h3>
+    <p><button onclick="changeWord()">点我改变文字</button></p>
+    <script>
+        // 1、用Vue.set改变
+        // function add(){
+        //       Vue.set(outData,'count',4);
+        // }
+        // 2、用Vue对象的方法添加
+        // app.count++;
+        // 3、直接操作外部数据
+        // outData.count++;
+        // 其实这三种方式都可以操作外部的数据，Vue也给我们增加了一种操作外部数据的方法。
+
+
+
+        /**
+        
+        三、为什么要有Vue.set的存在?
+        由于Javascript的限制，Vue不能自动检测以下变动的数组。
+        *当你利用索引直接设置一个项时，vue不会为我们自动更新。
+        *当你修改数组的长度时，vue不会为我们自动更新。
+        **/
+        function changeWord() {
+            Vue.set(app, 'message', '我是改变后的文字')
+                //用于改变数组
+            Vue.set(app.arr, 2, '我是改变后的数组')
+        }
+        var app = new Vue({
+            el: "#app",
+            data: {
+                message: '我是一开始的文字',
+                arr: ['aa', 'bb', 'cc']
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -5,20 +5,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Hello World</title>
+    <title>component</title>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 </head>
 
 <body>
-    <h1>helloworld 实例</h1>
+    <h1>component 实例</h1>
     <div id="app">
         {{message}}
+        <zenghyjubu :Propdata="message"></zenghyjubu>
     </div>
     <script>
         var app = new Vue({
             el: "#app",
             data: {
                 message: 'hello World!'
+            },
+            // 局部组件
+            components: {
+                'zenghyjubu': {
+                    //数据名称不支持'-'
+                    //数据从上往下传递使用的是:bind
+                    template: '<h1>我是局部组件 我传的数据是{{Propdata}}<h1>',
+                    props: ['Propdata']
+                }
             }
         })
     </script>

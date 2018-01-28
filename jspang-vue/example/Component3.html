@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Component 父子组件关系</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+    <h1>Component 父子组件关系</h1>
+    <div id="app">
+        {{message}}
+        <zenghy></zenghy>
+    </div>
+    <script>
+        /**
+                需要注意组件的加载顺序，最小的组件应该放到最上面
+                
+                **/
+        var other = {
+            template: `
+                <p>我是其他组件</p>
+            `
+        }
+        var zenghy = {
+            template: `
+            <div>
+                    <h1>构造器外注册的组件</h1>
+                    <other></other>
+            </div>
+            `,
+            components: {
+                'other': other
+            }
+        }
+
+        var app = new Vue({
+            el: "#app",
+            data: {
+                message: 'hello World!'
+            },
+            components: {
+                'zenghy': zenghy
+            }
+        })
+    </script>
+</body>
+
+</html>
