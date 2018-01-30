@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>propsData</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+    <h1>propsData option</h1>
+    <hr>
+    <header></header>
+    <script>
+        // 我们用propsData三步解决传值：
+        // 1、在全局扩展里加入props进行接收。propsData:{a:1}
+        // 2、传递时用propsData进行传递。props:[‘a’]
+        // 3、用插值的形式写入模板。{{ a }}
+        var header_a = Vue.extend({
+            template: '<p>{{propdata}}-{{a}}</p>',
+            data: function() {
+                return {
+                    propdata: 'hello world'
+                }
+            },
+            props: ['a']
+        })
+        new header_a({
+            propsData: {
+                a: 1
+            }
+        }).$mount('header')
+
+
+        // 总结： propsData在实际开发中我们使用的并不多， 
+        // 我们在后边会学到Vuex的应用， 
+        // 他的作用就是在单页应用中保持状态和数据的。
+    </script>
+</body>
+
+</html>
