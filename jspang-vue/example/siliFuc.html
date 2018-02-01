@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>实例入门-实例属性</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+</head>
+
+<body>
+    <h1>Examples Method Demo</h1>
+    <hr>
+    <div id="app">
+        {{message}}
+    </div>
+
+    <button onclick="destroyed()">销毁</button>
+    <button onclick="updated()">强迫刷新</button>
+    <button onclick="tick()">更改数据</button>
+    <script type="text/javascript">
+        // var jspang = Vue.extend({
+        //         template: `<p>{{message}}</p>`,
+        //         data: function() {
+        //             return {
+        //                 message: 'Hello ,I am JSPang'
+        //             }
+        //         }
+        //     })
+        //     // $mount方法是用来挂载我们的扩展的
+        // var vm = new jspang().$mount("#app")
+
+
+        var zenghy = Vue.extend({
+            template: "<p>{{message}}</p>",
+            data: function() {
+                return {
+                    message: 'hellow world'
+                }
+            },
+            mounted() {
+                console.log('挂载到实例了')
+            },
+            updated() {
+                console.log('我被刷新了')
+            },
+            destroyed() {
+                console.log('我被销毁了')
+            }
+        })
+        var vm = new zenghy().$mount('#app');
+
+        function destroyed() {
+            vm.$destroy();
+        }
+
+        function updated() {
+            vm.$forceUpdate();
+        }
+
+        function tick() {
+            vm.message = "update message info ";
+            vm.$nextTick(function() {
+                console.log('message更新完后我被调用了');
+            })
+        }
+    </script>
+</body>
+
+</html>

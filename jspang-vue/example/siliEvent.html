@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>实例入门-实例事件</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+</head>
+
+<body>
+    <h1>Examples Method Demo</h1>
+    <hr>
+    <div id="app">
+        {{num}}<br>
+        <button @click="add">add</button>
+
+    </div>
+    <button onclick="reduce()">reduce</button><br>
+    <button onclick="reduceOnce()">reduceOnce</button><br>
+    <button onclick="close()">关闭事件</button><br>
+    <script type="text/javascript">
+        // 实例事件就是在构造器外部写一个调用构造器内部的方法。
+        // 这样写的好处是可以通过这种写法在构造器外部调用构造器内部的数据。
+        var app = new Vue({
+            el: '#app',
+            data: {
+                num: 0
+            },
+            methods: {
+                add: function() {
+                    this.num++;
+                }
+            }
+        })
+
+        app.$on('reduce', function() {
+            console.log('执行了reduce()');
+            this.num--;
+        });
+        app.$once('reduceOnce', function() {
+            console.log('只调用一次reduceOnce');
+            this.num--;
+        })
+
+        function reduce() {
+            app.$emit('reduce')
+        }
+
+        function reduceOnce() {
+            app.$emit('reduceOnce')
+        }
+
+
+        //关闭事件
+        function close() {
+            app.$off('reduce');
+        }
+    </script>
+</body>
+
+</html>

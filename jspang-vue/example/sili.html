@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>实例入门-实例属性</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+</head>
+
+<body>
+    <h1>Early Examples Demo</h1>
+    <hr>
+    <div id="app">
+        {{message}}
+    </div>
+
+    <script type="text/javascript">
+        // 实例的作用就是给原生的或者其他
+        // javascript框架一个融合的接口或者说是机会，让Vue和其他框架一起使用。
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: 'hello Vue!'
+            },
+            //在Vue中使用jQuery
+            mounted: function() {
+                $('#app').html('我是jQuery!');
+            }
+        })
+
+        console.log(app)
+    </script>
+</body>
+
+</html>
