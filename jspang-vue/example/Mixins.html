@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mixins 混入选项操作</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+    <h1>Mixins Option Demo</h1>
+
+    <h4>
+        Mixins一般有两种用途： <br> 1、在你已经写好了构造器后，需要增加方法或者临时的活动时使用的方法，这时用混入会减少源代码的污染。 <br> 2、很多地方都会用到的公用方法，用混入的方法可以减少代码量，实现代码重用。
+    </h4>
+    <hr>
+    <div id="app">
+        <p>num:{{ num }}</p>
+        <P><button @click="add">增加数量</button></P>
+    </div>
+
+    <script type="text/javascript">
+        //额外临时加入时，用于显示日志
+        var addLog = {
+            updated: function() {
+                // console.log("数据放生变化,变化成" + this.num + ".");
+                alert();
+            }
+        }
+        Vue.mixin({
+            updated: function() {
+                console.log('我是全局被混入的');
+            }
+        })
+
+        // 全局API一般写在构造器前面
+        var app = new Vue({
+            el: '#app',
+            data: {
+                num: 1
+            },
+            methods: {
+                add: function() {
+                    this.num++;
+                },
+                addLog: function() {
+                    console.log(1);
+                }
+            },
+            // mixins: [addLog] //混入
+        })
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>delimiters 选项</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+    <h1>delimiters 选项</h1>
+    <div id="app">
+        {{message}}
+    </div>
+    <script>
+        // delimiters的作用是改变我们插值的符号。 Vue默认的插值是双大括号 {
+        //     {}
+        // }。
+        // 但有时我们会有需求更改这个插值的形式。
+        // delimiters: ['${', '}']
+        // 现在我们的插值形式就变成了$ {}。
+        var app = new Vue({
+            el: "#app",
+            data: {
+                message: 'hello World!'
+            }
+        })
+    </script>
+</body>
+
+</html>
