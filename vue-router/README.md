@@ -137,6 +137,102 @@ routes: [
 
 
 
+#### 单页面多路由区域操作
+
+---
+
+实际需求是这样的，在一个页面里我们有2个以上<router-view>区域，我们通过配置路由的js文件，来操作这些区域的内容。例如我们在src/App.vue里加上两个<router-view>标签。我们用vue-cli建立了新的项目，并打开了src目录下的App.vue文件，在<router-view>下面新写了两行<router-view>标签,并加入了些CSS样式。
+
+```
+<router-view ></router-view>
+<router-view name="left" style="float:left;width:50%;background-color:#ccc;height:300px;"></router-view>
+<router-view name="right" style="float:right;width:50%;background-color:#c0c;height:300px;"></router-view>
+```
+
+现在的页面中有了三个<router-view>标签，也就是说我们需要在路由里配置这三个区域，配置主要是在components字段里进行。
+
+```
+	 path: '/Hi',
+      components: {
+        default:Hello,
+        left:Hi2,
+        right:Hi1
+      }
+```
+
+最后在App.vue中配置我们的<router-link>就可以了
+
+```
+<router-link to="/">首页</router-link> | 
+<router-link to="/hi">Hi页面</router-link> |
+```
+
+#### vue-router 利用url传递参数
+
+---
+
+在实际开发也是有很多用URL传值的需求，比如我们在新闻列表中有很多新闻标题整齐的排列，我们需要点击每个新闻标题打开不同的新闻内容，这时在跳转路由时跟上新闻编号就十分实用。
+
+> :冒号的形式传递参数
+
+1.在配置文件里以冒号的形式设置参数。我们在/src/router/index.js文件里配置路由。
+
+```
+{
+    path:'/params/:newsId/:newsTitle',
+     component:Params
+}
+```
+
+2.在src/components目录下建立我们params.vue组件，也可以说是页面。我们在页面里输出了url传递的的新闻ID和新闻标题。
+
+```
+ <p>新闻ID：{{ $route.params.newsId}}</p>
+ <p>新闻标题：{{ $route.params.newsTitle}}</p>
+```
+
+3.在App.vue文件里加入我们的<router-view>标签。这时候我们可以直接利用url传值了。
+
+```
+<router-link to="/params/198/jspang website is very good">params</router-link> |
+```
+
+
+
+#### 正则表达式在URL传值中的应用
+
+---
+
+上边的例子，我们传递了新闻编号，现在需求升级了，我们希望我们传递的新闻ID只能是数字的形式，这时候我们就需要在传递时有个基本的类型判断，vue是支持正则的。
+
+加入正则需要在路由配置文件里（/src/router/index.js）以圆括号的形式加入。
+
+```
+path:'/params/:newsId(\\d+)/:newsTitle',
+```
+
+加入了正则，我们再传递数字之外的其他参数，params.vue组件就没有办法接收到。
+
+
+
+#### vue-router 的重定向-redirect
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Build Setup
 
 ``` bash
