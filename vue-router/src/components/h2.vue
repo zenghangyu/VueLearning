@@ -6,7 +6,7 @@
 </template>
 <script>
 export default {
-  name:"hi",
+  name:"h2",
   data () {
       return {
           msg:'子页面222222'
@@ -16,7 +16,7 @@ export default {
 </script>
 <style scoped>
     .hello{
-        color: red;
+        /* color: red; */
     }
 </style>
 

@@ -219,13 +219,134 @@ path:'/params/:newsId(\\d+)/:newsTitle',
 
 ---
 
+开发中有时候我们虽然设置的路径不一致，但是我们希望跳转到同一个页面，或者说是打开同一个组件。这时候我们就用到了路由的重新定向redirect参数。
+
+**redirect基本重定向**
+
+我们只要在路由配置文件中（/src/router/index.js）把原来的component换成redirect参数就可以了。我们来看一个简单的配置。
+
+```
+export default new Router({
+  routes: [
+    {
+      path: '/',
+      component: Hello
+    },{
+      path:'/params/:newsId(\\d+)/:newsTitle',
+      component:Params
+    },{
+      path:'/goback',
+      redirect:'/'
+    }
+
+  ]
+})
+```
+
+这里我们设置了goback路由，但是它并没有配置任何component（组件），而是直接redirect到path:’/’下了，这就是一个简单的重新定向。
+
+**重定向时传递参数**
+
+我们已经学会了通过url来传递参数，那我们重定向时如果也需要传递参数怎么办？其实vue也已经为我们设置好了，我们只需要在ridirect后边的参数里复制重定向路径的path参数就可以了。可能你看的有点晕，我们来看一段代码：
+
+```
+{
+  path:'/params/:newsId(\\d+)/:newsTitle',
+  component:Params
+},{
+  path:'/goParams/:newsId(\\d+)/:newsTitle',
+  redirect:'/params/:newsId(\\d+)/:newsTitle'
+}
+```
+
+已经有了一个params路由配置，我们在设置一个goParams的路由重定向，并传递了参数。这时候我们的路由参数就可以传递给params.vue组件了。参数接收方法和正常的路由接收方法一样。
 
 
 
 
 
+#### alias别名的使用
+
+---
+
+使用alias别名的形式，我们也可以实现类似重定向的效果。
 
 
+
+1.首先我们在路由配置文件里（/src/router/index.js），给上节课的Home路径起一个别名，xxx。
+
+```
+{
+    path: '/hi1',
+    component: Hi1,
+    alias:'/xxx'
+ }
+```
+
+2.配置我们的<router-link>，起过别名之后，可以直接使用<router-link>标签里的to属性，进行重新定向。
+
+```
+<router-link to="/xxx">xxx</router-link>
+```
+
+### redirect和alias的区别
+
+- redirect：仔细观察URL，redirect是直接改变了url的值，把url变成了真实的path路径。
+- alias：URL路径没有别改变，这种情况更友好，让用户知道自己访问的路径，只是改变了<router-view>中的内容。
+
+
+
+#### 路由的过渡动画
+
+---
+
+**<transition>标签**
+
+想让路由有过渡动画，需要在<router-view>标签的外部添加<transition>标签，标签还需要一个name属性。
+
+```
+<transition name="fade">
+  <router-view ></router-view>
+</transition>
+```
+
+**css过渡类名：**
+
+组件过渡过程中，会有四个CSS类名进行切换，这四个类名与transition的name属性有关，比如name=”fade”,会有如下四个CSS类名：
+
+1. fade-enter:进入过渡的开始状态，元素被插入时生效，只应用一帧后立刻删除。
+2. fade-enter-active:进入过渡的结束状态，元素被插入时就生效，在过渡过程完成后移除。
+3. fade-leave:离开过渡的开始状态，元素被删除时触发，只应用一帧后立刻删除。
+4. fade-leave-active:离开过渡的结束状态，元素被删除时生效，离开过渡完成后被删除。
+
+从上面四个类名可以看出，fade-enter-active和fade-leave-active在整个进入或离开过程中都有效，所以CSS的transition属性在这两个类下进行设置。
+
+那我们就在App.vue页面里加入四种CSS样式效果，并利用CSS3的transition属性控制动画的具体效果。代码如下：
+
+```
+.fade-enter {
+  opacity:0;
+}
+.fade-leave{
+  opacity:1;
+}
+.fade-enter-active{
+  transition:opacity .5s;
+}
+.fade-leave-active{
+  opacity:0;
+  transition:opacity .5s;
+}
+```
+
+
+
+上边的代码设置了改变透明度的动画过渡效果，但是默认的mode模式in-out模式，这并不是我们想要的。下面我们学一下mode模式。
+
+**过渡模式mode：**
+
+- in-out:新元素先进入过渡，完成之后当前元素过渡离开。
+- out-in:当前元素先进行过渡离开，离开完成后新元素过渡进入。
 
 
 
