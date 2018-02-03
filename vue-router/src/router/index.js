@@ -14,15 +14,19 @@ export default new Router({
         },
         {
             path: '/hi', //跳转专用
-            name: 'hi',
+            // name: 'hi',拥有子路由的name无效果
             component: HI,
             children: [{
-                    path: 'h1',
+                    path: '/',
+                    name: 'hi',
+                    component: HI
+                }, {
+                    path: '/h1',
                     name: 'h1',
                     component: h1
                 },
                 {
-                    path: 'h2',
+                    path: '/h2',
                     name: 'h2',
                     component: h2
                 }

@@ -2,9 +2,6 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
-    <router-link to="/hi">Hi</router-link>
-    <router-link to="/hi/h1">h1</router-link>
-    <router-link to="/hi/h2">h2</router-link>
   </div>
 </template>
 

@@ -82,6 +82,59 @@ export default new Router({
 })
 ```
 
+#### vue-router如何参数传递
+
+___
+
+> 一、用name传递参数
+
+在路由文件src/router/index.js里配置name属性。
+
+```
+routes: [
+    {
+      path: '/',
+      name: 'Hello',
+      component: Hello
+    }
+ ]
+```
+
+模板里(src/App.vue)用**$route.name**的形势接收，比如直接在模板中显示：
+
+```
+<p>{{ $route.name}}</p>
+```
+
+> 二、通过<router-link> 标签中的to传参
+
+也许你也会觉的上边的传参很不正规，也不方便，其实我们多数传参是不用name进行传参的，我们用<router-link>标签中的to属性进行传参，需要您注意的是这里的to要进行一个绑定，写成:to。先来看一下这种传参方法的基本语法：
+
+```
+<router-link :to="{name:xxx,params:{key:value}}">valueString</router-link>
+```
+
+
+
+这里的to前边是带冒号的，然后后边跟的是一个对象形势的字符串.
+
+- name：就是我们在路由配置文件中起的name值。
+- params：就是我们要传的参数，它也是对象形势，在对象里可以传递多个值。
+
+路由文件index.js需要配置如下
+
+```
+ {path:'/hi1',name:'hi1',component:Hi1},
+```
+
+最后在跳转目标文件接收形式如下
+
+```
+{{$route.params.username}}
+```
+
+
+
 
 
 ## Build Setup
