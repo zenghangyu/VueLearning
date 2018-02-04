@@ -351,6 +351,120 @@ export default new Router({
 
 
 
+#### mode的设置和404页面的处理
+
+---
+
+ **mode的两个值**
+
+1. histroy:当你使用 history 模式时，URL 就像正常的 url，例如 http://jsapng.com/lms/，也好看！
+2. hash:默认’hash’值，但是hash看起来就像无意义的字符排列，不太好看也不符合我们一般的网址浏览习惯。
+
+**404页面的设置：**
+
+用户会经常输错页面，当用户输错页面时，我们希望给他一个友好的提示，为此美工都会设计一个漂亮的页面，这个页面就是我们常说的404页面。vue-router也为我们提供了这样的机制.
+
+1.设置我们的路由配置文件（/src/router/index.js）：
+
+```
+{
+   path:'*',
+   component:Error
+}
+```
+
+这里的path:’*’就是找不到页面时的配置，component是我们新建的一个Error.vue的文件。
+
+2.新建404页面：
+
+在/src/components/文件夹下新建一个Error.vue的文件。简单输入一些有关错误页面的内容。
+
+```
+<template>
+    <div>
+        <h2>{{ msg }}</h2>
+    </div>
+</template>
+<script>
+export default {
+  data () {
+    return {
+      msg: 'Error:404'
+    }
+  }
+}
+</script>
+```
+
+3.我们在用<router-link>瞎写一个标签的路径。
+
+```
+ <router-link to="/bbbbbb">我是瞎写的</router-link> |
+```
+
+
+
+#### 路由中的钩子
+
+组件从进入到销毁有很多的钩子函数，同样在路由中也设置了钩子函数。路由的钩子选项可以写在路由配置文件中，也可以写在我们的组件模板中。
+
+**路由配置文件中的钩子函数**
+
+我们可以直接在路由配置文件（/src/router/index.js）中写钩子函数。但是在路由文件中我们只能写一个beforeEnter,就是在进入此路由配置时。先来看一段具体的代码：
+
+```
+{
+      path:'/params/:newsId(\\d+)/:newsTitle',
+      component:Params,
+      beforeEnter:(to,from,next)=>{
+        console.log('我进入了params模板');
+        console.log(to);
+        console.log(from);
+        next();
+},
+```
+
+我们在params路由里配置了bdforeEnter得钩子函数，函数我们采用了ES6的箭头函数，需要传递三个参数。我们并在箭头函数中打印了to和from函数。具体打印内容可以在控制台查看object。
+
+**写在模板中的钩子函数**
+
+在配置文件中的钩子函数，只有一个钩子-beforeEnter，如果我们写在模板中就可以有两个钩子函数可以使用：
+
+- beforeRouteEnter：在路由进入前的钩子函数。
+- beforeRouteLeave：在路由离开前的钩子函数。
+
+```
+export default {
+  name: 'params',
+  data () {
+    return {
+      msg: 'params page'
+    }
+  },
+  beforeRouteEnter:(to,from,next)=>{
+    console.log("准备进入路由模板");
+    next();
+  },
+  beforeRouteLeave: (to, from, next) => {
+    console.log("准备离开路由模板");
+    next();
+  }
+}
+</script>
+```
+
+这是我们写在params.vue模板里的路由钩子函数。它可以监控到路由的进入和路由的离开，也可以轻易的读出to和from的值。
+
+
+
+
+
+
+
+
+
+
+
 
 
 

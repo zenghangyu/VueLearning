@@ -6,9 +6,11 @@ import h1 from '@/components/h1.vue'
 import h2 from '@/components/h2.vue'
 import params from '@/components/params.vue'
 import alia from '@/components/alia.vue'
+import Error from '@/components/error.vue'
 Vue.use(Router)
 
 export default new Router({
+    mode: 'history',
     routes: [{
             path: '/',
             components: {
@@ -51,6 +53,10 @@ export default new Router({
             path: '/alias',
             component: alia,
             alias: '/zenghy'
+        },
+        {
+            path: '*',
+            component: Error
         }
     ]
 })

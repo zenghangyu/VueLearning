@@ -11,6 +11,7 @@
         <router-link to="/goparams/200/这是经过重定向传递过来的参数">goparams</router-link> |
         <router-link :to="{name:'h1',params:{id:123}}">h1</router-link>
         <router-link :to="{name:'h2',params:{username:'zenghy',id:15914205917}}">h2</router-link>
+        <router-link to="/bbbbbb">错误页面</router-link> |
     </div>
    <!-- <p>{{ $route.name}}</p> -->
     <transition name="fade" mode="out-in">
