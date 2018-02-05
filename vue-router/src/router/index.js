@@ -43,7 +43,13 @@ export default new Router({
             ]
         }, {
             path: '/params/:newsId(\\d+)/:newsTitle',
-            component: params
+            component: params,
+            // beforeEnter: (to, from, next) => {
+            //     console.log(to);
+            //     console.log(from);
+            //     next(); //相当于下一步的开关  也可以修改跳转路径
+            //     // next({ path: '/' })
+            // }
         },
         {
             path: '/goparams/:newsId(\\d+)/:newsTitle',

@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <img src="./assets/logo.png">
+    <p @click="home">返回首页</p>
     <div>
         <router-link to="/">首页</router-link>
         <router-link to="/Hi">Hi</router-link>
@@ -24,7 +25,12 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  methods:{
+    home(){
+      this.$router.push('/');
+    }
+  }
 }
 </script>
 

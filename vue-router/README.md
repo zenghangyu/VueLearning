@@ -459,6 +459,93 @@ export default {
 
 
 
+#### 编程式导航
+
+---
+
+**this.$router.go(-1) 和 this.$router.go(1)**
+
+这两个编程式导航的意思是后退和前进，功能跟我们浏览器上的后退和前进按钮一样，这在业务逻辑中经常用到。比如条件不满足时，我们需要后退。
+
+router.go(-1)代表着后退，我们可以让我们的导航进行后退，并且我们的地址栏也是有所变化的。
+
+1.我们先在app.vue文件里加入一个按钮，按钮并绑定一个goback( )方法。
+
+```
+<button @click="goback">后退</button>
+```
+
+2.在我们的script模块中写入goback()方法，并使用this.$router.go(-1),进行后退操作。
+
+```
+<script>
+export default {
+  name: 'app',
+  methods:{
+    goback(){
+      this.$router.go(-1);
+    }
+  }
+}
+</script>
+```
+
+**this.$router.push(‘/xxx ‘)**
+
+这个编程式导航都作用就是跳转，比如我们判断用户名和密码正确时，需要跳转到用户中心页面或者首页，都用到这个编程的方法来操作路由。
+
+我们设置一个按钮，点击按钮后回到站点首页。
+
+1.先编写一个按钮，在按钮上绑定goHome( )方法。
+
+```
+<button @click="goHome">回到首页</button>
+```
+
+2.在<script>模块里加入goHome方法，并用this.$router.push(‘/’)导航到首页
+
+```
+export default {
+  name: 'app',
+  methods:{
+    goback(){
+      this.$router.go(-1);
+    },
+    goHome(){
+      this.$router.push('/');
+    }
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
