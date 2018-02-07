@@ -1,6 +1,9 @@
 <template>
   <div id="app">
     <img src="./assets/logo.png">
+    <div>
+      <router-link to="/count">demo</router-link>
+    </div>
     <router-view/>
   </div>
 </template>
