@@ -115,7 +115,7 @@ methods:mapMutations([
 
 #### getters计算过滤操作
 
-getters从表面是获得的意思，可以把他看作在获取数据之前进行的一种再编辑,相当于对数据的一个过滤和加工。你可以把它看作store.js的计算属性。
+getters从表面是获得的意思，可以把他看作在获取数据之前进行的一种再编辑,相当于**对数据的一个过滤和加工**。你可以把它看作**store.js的计算属性。**
 
 **getters基本用法：**
 
@@ -166,5 +166,110 @@ import { mapState,mapMutations,mapGetters } from 'vuex';
 
 ```
 ...mapGetters(["count"])
+```
+
+---
+
+
+
+
+
+#### actions异步修改状态
+
+actions和之前讲的Mutations功能基本一样，不同点是，**actions是异步的改变state状态**，而Mutations是同步改变状态。
+
+**在store.js中声明actions**
+
+actions是可以调用Mutations里的方法的，我们还是继续在上节课的代码基础上进行学习，在actions里调用add和reduce两个方法。
+
+```
+const actions ={
+    addAction(context){
+        context.commit('add',10)
+    },
+    reduceAction({commit}){
+        commit('reduce')
+    }
+}
+```
+
+在actions里写了两个方法addAction和reduceAction，在方法体里，我们都用commit调用了Mutations里边的方法。细心的小伙伴会发现这两个方法传递的参数也不一样。
+
+- context：上下文对象，这里你可以理解称store本身。
+- {commit}：直接把commit对象传递过来，可以让方法体逻辑和代码更清晰明了。
+
+**模板中的使用**
+
+我们需要在count.vue模板中编写代码，让actions生效。我们先复制两个以前有的按钮，并改成我们的actions里的方法名，分别是：addAction和reduceAction。
+
+```
+<p>
+  <button @click="addAction">+</button>
+  <button @click="reduceAction">-</button>
+</p>
+```
+
+改造一下我们的methods方法，首先还是用扩展运算符把mapMutations和mapActions加入`
+
+```
+methods:{
+    ...mapMutations([  
+        'add','reduce'
+    ]),
+    ...mapActions(['addAction','reduceAction'])
+},
+```
+
+你还要记得用import把我们的mapActions引入才可以使用。
+
+**增加异步检验**
+
+我们现在看的效果和我们用Mutations作的一模一样，肯定有的小伙伴会好奇，那actions有什么用，我们为了演示actions的异步功能，我们增加一个计时器（setTimeOut）延迟执行。在addAction里使用setTimeOut进行延迟执行。
+
+```
+setTimeOut(()=>{context.commit(reduce)},3000);
+console.log('我比reduce提前执行');
+```
+
+我们可以看到在控制台先打印出了‘我比reduce提前执行’这句话。
+
+#### module模块组
+
+随着项目的复杂性增加，我们共享的状态越来越多，这时候我们就需要把我们状态的各种操作进行一个分组，分组后再进行按组编写。module：状态管理器的模块组操作。
+
+**声明模块组：**
+
+在vuex/store.js中声明模块组，我们还是用我们的const常量的方法声明模块组。代码如下：
+
+```
+const moduleA={
+    state,mutations,getters,actions
+}
+```
+
+声明好后，我们需要修改原来 Vuex.Stroe里的值：
+
+```
+export default new Vuex.Store({
+    modules:{a:moduleA}
+})
+```
+
+**在模板中使用**
+
+现在我们要在模板中使用count状态，要用插值的形式写入。
+
+```
+<h3>{{$store.state.a.count}}</h3>
+```
+
+如果想用简单的方法引入，还是要在我们的计算属性中rutrun我们的状态。写法如下：
+
+```
+computed:{
+    count(){
+        return this.$store.state.a.count;
+    }
+},
 ```
 

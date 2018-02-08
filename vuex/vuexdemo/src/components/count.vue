@@ -2,17 +2,21 @@
     <div>
         <h2>{{msg}}</h2>
         <hr/>
-        <h3>{{$store.state.count}}</h3>
-        <p>{{count}}</p>
-        <div>
-            <button @click="add(4)">+</button>
+        <h3>{{$store.state.moduleA.count}}</h3>
+        <!-- <p>{{moduleA.count}}</p> -->
+        <!-- <div>
+            <button @click="add(1)">+</button>
             <button @click="reduce">-</button>
-        </div>
+        </div> -->
+        <!-- <p>
+            <button @click="addAction">+</button>
+            <button @click="reduceAction">-</button>
+        </p> -->
     </div>
 </template>
 <script>
     import store from '@/vuex/store';
-    import { mapState , mapMutations } from 'vuex'
+    import { mapState , mapMutations , mapGetters , mapActions  } from 'vuex'
     export default{
         data(){
             return{
@@ -22,19 +26,30 @@
         },
         store
         ,
-       computed:mapState(["count"])
+       computed:{
+        //    ...mapState(["count"]),
+        //    ...mapGetters(["count"])
+        //    count(){
+        //         return this.$store.getters.count;
+        //     }
+            
+            count(){
+                return '这是第一种方法将状态对象赋值给内部对象:'+this.$store.state.moduleA.count;
+            }
+        }
         // mapState({
         //         count:state=>state.count
         // })
         // {
-        //     count(){
-        //         return '这是第一种方法将状态对象赋值给内部对象:'+this.$store.state.count;
-        //     },
+            
            
         // }
         ,
-        methods:mapMutations([
-            'add','reduce'
-        ])
+        // methods:{
+        //     ...mapMutations([
+        //     'add','reduce'
+        //     ]),
+        //    ...mapActions(['addAction','reduceAction'])
+        // }
     }
 </script>
