@@ -1,7 +1,7 @@
 # pos
 
 > A Vue.js project
-
+![](https://github.com/zenghangyu/VueLearning/blob/master/posproject/src/assets/GIF.gif)
 ## Build Setup
 
 ``` bash
